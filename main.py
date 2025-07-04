@@ -3,8 +3,11 @@ from modules import news_monitor, evacuation_monitor, travel_alerts, flights, fo
 from utils.discord import send_to_discord
 
 def main():
-    report = ["Hi DC"]
+    report = []
     
+    travel_result = travel_alerts.run()
+    report.append(travel_result)
+
     send_to_discord("\n".join(report), DISCORD_WEBHOOK)
 
 if __name__ == "__main__":
