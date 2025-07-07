@@ -31,4 +31,4 @@ python main.py
 
 ## Analyze resource
 
-- U.S. DEPARTMENT of STATE - [Travel.State.Gov](https://travel.state.gov/)
+- U.S. DEPARTMENT of STATE - [Travel.State.Gov](https://travel.state.gov/content/travel.html)
