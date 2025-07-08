@@ -10,7 +10,7 @@ def run():
         "content": "模組異常"
     }
     try:
-        url = "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/new-caledonia-travel-advisory.html"
+        url = "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/taiwan-travel-advisory.html"
         headers = {"User-Agent": "Mozilla/5.0"}
 
         response = requests.get(url, headers=headers)
