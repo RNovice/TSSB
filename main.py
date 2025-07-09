@@ -9,8 +9,9 @@ def main():
     
     travel_section = handle_content(status, header, travel_alerts.run())
     
-    if len(status) == 0: status = ["✅☮️"]
-    report = f'## {"".join(status)}\n> {" | ".join(header)}\n\n{travel_section}\n\n'
+    status = "".join(status)
+    if len(status) == 0: status = "✅☮️"
+    report = f'{status}\n> {" | ".join(header)}\n\n{travel_section}\n\n'
 
     send_to_discord(report, DISCORD_WEBHOOK)
 
