@@ -32,12 +32,12 @@ def run():
         if level not in [1, 2, 3, 4]:
                 raise ValueError("unknown advisory level", level) 
         if level == 1:
-            result["content"] = f"{level}級，一切正常 \n{text}"
+            result["content"] = f"等級{level}，一切正常 \n{text} \n[資料來源](<{url}>)"
         else:
             result.update({
                 "status": "🚨",
                 "header": "🚨",
-                "content": f"{level}級，{'狀態反常，需高度警覺' if level == 2 else '高度危險'} \n{text}"
+                "content": f"等級{level}，{'狀態反常，極度危險' if level == 2 else '高度危險'} \n{text} \n[資料來源](<{url}>)"
             })
 
     except Exception as e:

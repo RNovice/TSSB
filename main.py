@@ -8,10 +8,11 @@ def main():
     header = []
     
     travel_section = handle_content(status, header, travel_alerts.run())
+    adiz_section = handle_content(status, header, adiz.run())
     
     status = "".join(status)
     if len(status) == 0: status = "✅☮️"
-    report = f'{status}\n> {" | ".join(header)}\n\n{travel_section}\n\n'
+    report = f'{status}\n> {" | ".join(header)}\n\n{travel_section}\n\n{adiz_section}\n\n'
 
     send_to_discord(report, DISCORD_WEBHOOK)
 
