@@ -28,3 +28,4 @@ jobs:
 
 env:
   DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+  FLIGHTS_API_KEY: ${{ secrets.FLIGHTS_API_KEY }}
