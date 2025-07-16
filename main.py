@@ -13,10 +13,12 @@ def main():
         flights_section = handle_content(status, header, flights.run(FLIGHTS_API_KEY))
     else:
         flights_section = ""
+        
+    news_section = handle_content([], [], news.run())
     
     status = "".join(status)
     if len(status) == 0: status = "✅☮️"
-    report = f'{status}\n> {" | ".join(header)}\n\n{travel_section}\n\n{adiz_section}\n\n{flights_section}\n\n'
+    report = f'{status}\n> {" | ".join(header)}\n\n{travel_section}\n\n{adiz_section}\n\n{flights_section}\n\n{news_section}\n\n'
 
     send_to_discord(report, DISCORD_WEBHOOK)
 

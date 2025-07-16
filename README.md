@@ -34,3 +34,4 @@ python main.py
 - U.S. DEPARTMENT of STATE - [Travel.State.Gov](https://travel.state.gov/content/travel.html)
 - Aviationstack Global Aviation Data - [Aviationstack](https://aviationstack.com)
 - Taiwan Ministry of National Defense - [mnd.gov.tw](https://www.mnd.gov.tw/)
+- Google News - [news.google.com](https://news.google.com/)
