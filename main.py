@@ -1,5 +1,5 @@
 from config import DISCORD_WEBHOOK, FLIGHTS_API_KEY
-from modules import evacuation, news, travel_alerts, flights, forex, adiz, stock
+from modules import evacuation, news, travel_alerts, flights, forex, adiz
 from utils.discord import send_to_discord
 from utils.content import handle_content
 

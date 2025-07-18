@@ -34,7 +34,7 @@ def volatility(cur, his):
 def run():
   result = {
     "name": "美元對台幣波動",
-    "symbol": "💱",
+    "symbol": "💲",
     "status": "",
     "header": "☮️",
     "content": "模組異常"
