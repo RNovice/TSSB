@@ -48,7 +48,7 @@ def run():
         result.update({
             "status": "🐞",
             "header": "🐞",
-            "content": f"module error, please fix the bug \n{e}"
+            "content": f"module error, please fix the bug \n{str(e)[:200]}"
         })
 
     return result

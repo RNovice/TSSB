@@ -36,17 +36,17 @@ def run(API_KEY: str):
         cancelledAmount = int(cancelled["pagination"]['total'])
       
     cancelledContent = f'取消{cancelledAmount}班' if cancelledAmount is not None else "取消航班取得失敗"
-    if totalAmount < 800 or (cancelledAmount is not None and cancelledAmount > 8):
-      result.update({
-        "status": "⚠️",
-        "header": "⚠️",
-        "content": f"航班數量偏低或取消數量偏多。總計{totalAmount}班，{cancelledContent} \n[資料來源](<{sourceUrl}>)"
-      })
-    elif totalAmount < 600 or (cancelledAmount is not None and cancelledAmount > 15):
+    if totalAmount < 600 or (cancelledAmount is not None and cancelledAmount > 30):
       result.update({
         "status": "🚨",
         "header": "🚨",
         "content": f"航班數量過低或取消數量過多。總計{totalAmount}班，{cancelledContent} \n[資料來源](<{sourceUrl}>)"
+      })
+    elif totalAmount < 800 or (cancelledAmount is not None and cancelledAmount > 15):
+      result.update({
+        "status": "⚠️",
+        "header": "⚠️",
+        "content": f"航班數量偏低或取消數量偏多。總計{totalAmount}班，{cancelledContent} \n[資料來源](<{sourceUrl}>)"
       })
     else:
       result.update({
@@ -57,7 +57,7 @@ def run(API_KEY: str):
     result.update({
       "status": "🐞",
       "header": "🐞",
-      "content": f"module error, please fix the bug \n{e}"
+      "content": f"module error, please fix the bug \n{str(e)[:200]}"
     })
       
   return result

@@ -1,33 +1,27 @@
 from config import DISCORD_WEBHOOK, FLIGHTS_API_KEY
-from modules import evacuation, news, travel_alerts, flights, forex, adiz
+from modules import news, travel_alerts, flights, forex, adiz
 from utils.discord import send_to_discord
 from utils.content import handle_content
 
 def main():
-    status = []
-    header = []
-    sections = []
+    status, header, sections = [], [], []
     
-    travel_section = handle_content(status, header, travel_alerts.run())
-    sections.append(travel_section)
-    adiz_section = handle_content(status, header, adiz.run())
-    sections.append(adiz_section)
+    for module in [travel_alerts, adiz, forex]:
+        sections.append(handle_content(status, header, module.run()))
+        
     if FLIGHTS_API_KEY:
         flights_section = handle_content(status, header, flights.run(FLIGHTS_API_KEY))
         sections.append(flights_section)
     else:
         flights_section = ""
-    
-    forex_section = handle_content(status, header, forex.run())
-    sections.append(forex_section)
         
     news_section = handle_content([], [], news.run())
     sections.append(news_section)
     
-    status = "".join(status)
-    section_content = "\n\n".join(sections)
-    if len(status) == 0: status = "✅☮️"
-    report = f'{status}\n> {" | ".join(header)}\n\n{section_content}'
+    report_status = "".join(status) or "✅☮️"
+    report_header = f'> {" | ".join(header)}' if header else ''
+    report_body = "\n\n".join(sections)
+    report = f'{report_status}\n{report_header}\n\n{report_body}'
 
     send_to_discord(report, DISCORD_WEBHOOK)
 
