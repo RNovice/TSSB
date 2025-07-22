@@ -1,4 +1,6 @@
-## Fork for GitHub action
+[中文指南](README.zh.md)
+
+## Fork for GitHub action automation
 
 --
 
@@ -20,6 +22,7 @@ setup `.env` file：
 
 ```
 DISCORD_WEBHOOK={{your discord webhooks url}}
+FLIGHTS_API_KEY={{your aviationstack api key}}
 ```
 
 run scripts：
