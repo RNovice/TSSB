@@ -12,9 +12,6 @@
      - Name: `FLIGHTS_API_KEY`
      - Secret: Your aviationstack API key
    - > FLIGHTS_API_KEY is optional. The script will skip flight-related data if not provided.
-   <!-- - New repository secret > Name `DISCORD_WEBHOOK` > Secret: `your discord webhook url`
-   - New repository secret > Name `FLIGHTS_API_KEY` > Secret: `your aviationstack api key`
-   - `FLIGHTS_API_KEY` is optional, script well skip if not setup -->
 3. Enable GitHub Actions workflows:
 
    - Navigate to: **Actions**
