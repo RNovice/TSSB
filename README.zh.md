@@ -34,6 +34,33 @@
    - 在 **Actions** 頁面中，選擇 **Daily Alert Report**
    - 點選 **Run workflow**，等待執行完畢後查看結果
 
+### 客製化
+
+1. 發送時間
+   - 每日 7:00 發送消息，包含運作時間、網路等狀況大約 7:10 ~ 20
+   - 更改 [`.github/workflows/daily.yml`](.github/workflows/daily.yml) 中的 `on: schedule: - cron:` 設置時間
+   - 格式為 UTC+0 `分 時 日 月 週`，[格式詳細](https://zh.wikipedia.org/zh-tw/Cron)
+   ```diff
+   # 範例 - 從每日7:00(UTC+8)
+   - - cron: "00 23 * * *"
+   # 改為每月1號11:11(UTC+8)
+   + - cron: "11 3 1 * *"
+   ```
+2. 中國軍機、軍艦動態
+   - 共機數量 > 40 或 共艦數量 > 15 會發警告 ⚠️
+   - 共機數量 > 70 或 共艦數量 > 30 會發警報 🚨
+   - 可在 [`modules/adiz.py`](modules/adiz.py) 更改
+3. 美元對台幣波動
+   - 單日漲幅 > 1.5% 或 雙日漲幅 > 2.0% 會發警告 ⚠️
+   - 單日漲幅 > 3.0% 或 雙日漲幅 > 4.0% 會發警報 🚨
+   - 可在 [`modules/forex.py`](modules/forex.py) 更改
+4. 今日飛往桃園機場航班
+   - 因為撈取資料的時間不同取得航班數會有差異
+     - 有調整發送時間者建議調整航班參考值
+   - 總航班數 > 800 或 取消航班數 > 15 會發警告 ⚠️
+   - 總航班數 > 600 或 取消航班數 > 30 會發警報 🚨
+   - 可在 [`modules/flights.py`](modules/flights.py) 更改
+
 ## 本地運行
 
 > 註：不同作業系統可能需使用 `python3` 與 `pip3`
