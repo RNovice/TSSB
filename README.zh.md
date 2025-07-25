@@ -100,3 +100,7 @@ python main.py
 - Google 新聞 - [news.google.com](https://news.google.com/)
 - 美國國務院 - [Travel.State.Gov](https://travel.state.gov/content/travel.html)
 - 台灣國防部 - [mnd.gov.tw](https://www.mnd.gov.tw/)
+
+## 訊息範例
+
+[連結](SHOWME.md)

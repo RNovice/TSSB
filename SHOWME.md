@@ -1,4 +1,4 @@
-# 台海安全每日彙報
+# 台海安全每日彙報機器人
 
 ## 摘要
 
@@ -16,15 +16,19 @@
 ## 範例
 
 > 手機通知預覽
+>
 > ![通知](.github/readme-assets/notification.png)
 
 > 正常狀況訊息
+>
 > ![正常](.github/readme-assets/normal.png)
 
 > 兩個模組發出警告，一個模組出錯
+>
 > ![警告](.github/readme-assets/warning.png)
 
 > 兩個模組發出嚴重警報
+>
 > ![緊張](.github/readme-assets/alert.png)
 
 ## 如何設置
