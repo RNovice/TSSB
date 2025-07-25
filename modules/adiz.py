@@ -64,7 +64,7 @@ def run():
         content += f"共機{aircraft}架、" if aircraft is not None else "沒有共機數量、" 
         content += f"共艦{ship}艘" if ship is not None else "沒有共艦數量"
             
-        result["content"] = content + f" \n{news_content.replace('二、','')} \n[資料來源](<{url}>)"
+        result["content"] = content + f" \n{news_content.replace('二、','').rstrip()} \n[資料來源](<{url}>)"
 
     except Exception as e:
         result.update({
