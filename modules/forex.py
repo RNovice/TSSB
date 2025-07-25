@@ -65,18 +65,18 @@ def run():
     )
     
     content = "一切正常。"
-    if vol_1d > 1.5 or (vol_2d and vol_2d > 2):
-      result.update({
-        "status": "⚠️",
-        "header": "⚠️",
-      })
-      content = "漲幅異常，單日超過1.5%或雙日超過2%，建議比對其他項目。 \n"
-    elif vol_1d > 3 or (vol_2d and vol_2d > 4):
+    if vol_1d > 3 or (vol_2d and vol_2d > 4):
       result.update({
         "status": "🚨",
         "header": "🚨",
       })
       content = "漲幅反常，單日超過3%或雙日超過4%，提高警覺。 \n"
+    elif vol_1d > 1.5 or (vol_2d and vol_2d > 2):
+      result.update({
+        "status": "⚠️",
+        "header": "⚠️",
+      })
+      content = "漲幅異常，單日超過1.5%或雙日超過2%，建議比對其他項目。 \n"
       
     
     result["content"] = f"{content}{report} \n[資料來源](<https://github.com/fawazahmed0/exchange-api>)"
