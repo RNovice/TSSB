@@ -16,7 +16,7 @@ def run():
     try:
         try:
             options = Options()
-            options.add_argument("--headless")
+            # options.add_argument("--headless")
             options.add_argument("--no-sandbox")
             options.add_argument("--disable-dev-shm-usage")
 
@@ -26,10 +26,11 @@ def run():
             try:
                 driver.get("https://www.mnd.gov.tw/PublishTable.aspx?Types=即時軍事動態&title=國防消息")
             except: raise Exception("URL error")
+            time.sleep(5)
             try:
-                driver.find_element(By.XPATH, '//table[@class="newstitles"]//*[contains(text(), "海、空域動態")]').click()
+                driver.find_element(By.XPATH, '//div[@class="news_list_box"]//*[contains(text(), "海、空域動態")]').click()
             except: raise Exception("news title not found")
-            time.sleep(1)
+            time.sleep(5)
             url = driver.current_url
             try:
                 news_content_ele = driver.find_element(By.XPATH, '//p[contains(text(), "活動動態")]')
