@@ -20,8 +20,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Install Chromium browser
-        run: sudo apt-get update && sudo apt-get install -y chromium-browser
+      # - name: Install Chromium browser
+      #   run: sudo apt-get update && sudo apt-get install -y chromium-browser
 
       - name: Run script
         run: python main.py

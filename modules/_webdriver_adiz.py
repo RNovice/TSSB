@@ -1,6 +1,9 @@
-import requests, re, urllib3
-from bs4 import BeautifulSoup
-
+import re, time
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
 
 def run():
     result = {
@@ -12,32 +15,31 @@ def run():
     }
     try:
         try:
-            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-            BASE = "https://www.mnd.gov.tw"
+            options = Options()
+            options.add_argument("--headless")
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
 
-            res = requests.get(f"{BASE}/news/plaactlist", verify=False)
-            res.encoding = "utf-8"
-            soup = BeautifulSoup(res.text, "html.parser")
+            service = Service(ChromeDriverManager().install())
+            driver = webdriver.Chrome(service=service, options=options)
 
-            target_a = next(
-                a for a in soup.find_all("a", class_="news_list")
-                if a.find("h4", class_="title") and "海、空域動態" in a.find("h4", class_="title").text
-            )
-            latest = target_a.get("href")
+            try:
+                driver.get("https://www.mnd.gov.tw/news/plaactlist")
+            except: raise Exception("URL error")
+            time.sleep(5)
+            try:
+                driver.find_element(By.XPATH, '//div[@class="news_list_box"]//*[contains(text(), "海、空域動態")]').click()
+            except: raise Exception("news title not found")
+            time.sleep(5)
+            url = driver.current_url
+            try:
+                news_content_ele = driver.find_element(By.XPATH, '//p[contains(text(), "活動動態")]')
+                news_content = news_content_ele.text
+            except: raise Exception("news content not matched")
 
-            url = f"{BASE}/{latest}"
-
-            art_res = requests.get(url, verify=False)
-            art_res.encoding = "utf-8"
-            art_soup = BeautifulSoup(art_res.text, "html.parser")
-
-            p_list = art_soup.select("div.maincontent p")
-            news_content = next((p.text for p in p_list if "活動動態" in p.text), None)
-            if news_content is None:
-                raise Exception("news content '活動動態' not matched")
-
+            driver.quit()
         except Exception as e:
-            raise Exception(f"BeautifulSoup error, {str(e)}")
+            raise Exception(f"selenium error, {str(e)}")
             
         
         match = re.search(r'共機(\d+)架', news_content)
@@ -63,7 +65,7 @@ def run():
         content += f"共機{aircraft}架、" if aircraft is not None else "沒有共機數量、" 
         content += f"共艦{ship}艘" if ship is not None else "沒有共艦數量"
             
-        result["content"] = content + f" \n{news_content.replace('二、','').replace('\r','').rstrip()} \n[資料來源](<{url}>)"
+        result["content"] = content + f" \n{news_content.replace('二、','').rstrip()} \n[資料來源](<{url}>)"
 
     except Exception as e:
         result.update({
