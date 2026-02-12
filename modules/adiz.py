@@ -20,9 +20,12 @@ def run():
             soup = BeautifulSoup(res.text, "html.parser")
 
             target_a = next(
-                a for a in soup.find_all("a", class_="news_list")
-                if a.find("h4", class_="title") and "海、空域動態" in a.find("h4", class_="title").text
-            )
+                (a for a in soup.find_all("a", class_="news_list")
+                if a.find("div", class_="title") and "海、空域動態" in a.find("div", class_="title").text)
+            , None)
+            if target_a is None:
+                raise Exception("target_a not found")
+            
             latest = target_a.get("href")
 
             url = f"{BASE}/{latest}"
