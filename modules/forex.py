@@ -21,7 +21,7 @@ def get_usd_to_twd(date_obj):
   date_str = date_obj.isoformat()
   url = f"https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@{date_str}/v1/currencies/usd.json"
   try:
-    response = requests.get(url)
+    response = requests.get(url, timeout=10)
     response.raise_for_status()
     return response.json().get('usd', {}).get('twd')
   except Exception:
@@ -40,14 +40,14 @@ def run():
     "content": "模組異常"
   }
   try:
-    today = date.today()
+    base = date.today() - timedelta(days=1)
     rates = {
-      str(offset): get_usd_to_twd(today - timedelta(days=offset))
+      str(offset): get_usd_to_twd(base - timedelta(days=offset))
       for offset in [0, 1, 2, 7]
     }
-    
+
     cur_rate = rates['0']
-    if cur_rate is None: 
+    if cur_rate is None:
       raise Exception("現價取得失敗")
     
     vol_1d = volatility(cur_rate, rates['1'])
